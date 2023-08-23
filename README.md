@@ -1,6 +1,7 @@
-# Nuxt 3 Minimal Starter
+# MeDM
+This repository contains the source code for [MeDM website](https://medm2023.github.io). ([arXiv](https://arxiv.org/abs/2308.10079)).
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+The website leverages latest Web Technologies: [Vue](https://vuejs.org) and [Nuxt](https://nuxt.com). The former let you develop with ease, and the latter provides the best-in-class SEO to make your project spread.
 
 ## Setup
 
@@ -32,32 +33,15 @@ pnpm run dev
 yarn dev
 ```
 
-## Production
+## Publish on GitHub Pages
 
-Build the application for production:
-
+We provide a workflow in `.github/workflow/deploy.yml` to let GitHub builds and deploys the website for us upon pushes to the main branch. However, if you want to deploy the website yourself without pushing to GitHub, you can use
 ```bash
 # npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
+npm run generate
+npm run deploy
 ```
 
-Locally preview production build:
+## Website License
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
