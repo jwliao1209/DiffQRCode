@@ -1,5 +1,8 @@
 # MeDM
-This repository contains the source code for [MeDM website](https://medm2023.github.io). ([arXiv](https://arxiv.org/abs/2308.10079)).
+
+### MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance [[arXiv](https://arxiv.org/abs/2308.10079)]
+
+This repository contains the source code for [MeDM website](https://medm2023.github.io).
 
 The website leverages latest Web Technologies: [Vue](https://vuejs.org) and [Nuxt](https://nuxt.com). The former let you develop with ease, and the latter provides the best-in-class SEO to make your project spread.
 
