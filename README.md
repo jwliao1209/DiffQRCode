@@ -4,7 +4,7 @@
 
 This repository contains the source code for [MeDM website](https://medm2023.github.io).
 
-The website leverages latest Web Technologies: [Vue](https://vuejs.org) and [Nuxt](https://nuxt.com). The former let you develop with ease, and the latter provides the best-in-class SEO to make your project spread.
+The website leverages the latest Web Technologies: [Vue](https://vuejs.org) and [Nuxt](https://nuxt.com). The former let you develop with ease, and the latter provides the best-in-class SEO to make your project spread.
 
 ## Setup
 
