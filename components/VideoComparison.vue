@@ -10,8 +10,15 @@ Number.prototype.clamp = function (min, max) {
 
 const video = ref(null)
 const canvas = ref(null)
+let rendered = false
 function setupSlider () {
-  video.value.style.height = "0px"  // Hide video without stopping it
+  // we have to make this function triggered on `timeupdate`
+  // if we use `play` event, vue sometimes fails to capture the event during
+  //   local development (probably because the video plays before vue is instantiated)
+  if (rendered) {
+    return
+  }
+  rendered = true
 
   let position = 0.5
   const width = video.value.videoWidth / 2
@@ -59,15 +66,34 @@ function setupSlider () {
 
 </script>
 <template>
-<video ref="video" poster="" loop muted autoplay @play="setupSlider">
-  <source :src="props.url" />
-</video>
-<canvas ref="canvas"></canvas>
+<div class="video-and-canvas">
+  <video ref="video" poster="" loop muted autoplay playsinline @timeupdate="setupSlider">
+    <source :src="props.url" />
+  </video>
+  <canvas ref="canvas"></canvas>
+</div>
 
 </template>
 
 <style scoped>
 canvas {
   cursor: grabbing;
+}
+video {
+  /*
+    Hide video without stopping it.
+    Most of the browsers pause the video when it goes out of view.
+    So we make it positioned at the middle of the canvas, vertically,
+    and use negative z-index to hide it.
+    Additionally, the video has to take up some pixels to be played by the browsers,
+    so we make its height 1px.
+  */
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+  height: 1px;
+}
+.video-and-canvas {
+  position: relative;
 }
 </style>

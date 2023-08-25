@@ -33,6 +33,7 @@
   background-position: top;
   background-repeat: no-repeat;
   background-color: #153146;
+  margin-top: 100px;
 }
 .footer a {
   color: white;
