@@ -1,7 +1,7 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
 
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 const props = defineProps(['url'])
 
 Number.prototype.clamp = function (min, max) {
@@ -59,7 +59,7 @@ function setupSlider () {
 
 </script>
 <template>
-<video ref="video" poster="" loop muted @play="setupSlider">
+<video ref="video" poster="" loop muted autoplay @play="setupSlider">
   <source :src="props.url" />
 </video>
 <canvas ref="canvas"></canvas>

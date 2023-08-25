@@ -8,9 +8,6 @@
 </template>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-}
+@import url("~/assets/css/main.css");
 </style>
 

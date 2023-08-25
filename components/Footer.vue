@@ -13,7 +13,7 @@
 </template>
 
 <style scoped>
-.footer::before {
+.footer:before {
   background-image: url(/images/backgrounds/wave.png);
   content: " ";
   position: absolute;
@@ -23,7 +23,6 @@
   background-size: cover;
   width: 100%;
   height: 188px;
-  z-index: 1;
   pointer-events: none;
 }
 .footer {
@@ -39,6 +38,8 @@
   color: white;
 }
 .content {
+  position: relative;
   padding: 100px 100px;
+  z-index: 1;
 }
 </style>

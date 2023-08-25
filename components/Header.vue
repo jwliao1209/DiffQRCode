@@ -41,9 +41,7 @@ const config = reactive({
 
     <div class="link-list">
       <div class="link" v-for="link in config.links">
-        <a :href="link.url" target="_blank">
-          <div>{{ link.text }}</div>
-        </a>
+        <a :href="link.url" target="_blank">{{ link.text }}</a>
       </div>
     </div>
   </div>
