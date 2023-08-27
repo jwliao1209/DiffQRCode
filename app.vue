@@ -1,9 +1,12 @@
 <script setup>
+useHead({
+  title: 'MeDM',
+})
 </script>
 
 <template>
   <Header />
-  <VideoComparison url="/videos/teaser.mp4" />
+  <Main />
   <Footer />
 </template>
 

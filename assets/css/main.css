@@ -12,6 +12,7 @@ a {
   color: var(--color-text);
   text-decoration: none;
   position: relative;
+  white-space: nowrap;
 }
 a:after {
   content: '';

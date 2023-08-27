@@ -77,6 +77,7 @@ function setupSlider () {
 
 <style scoped>
 canvas {
+  width: 100%;
   cursor: grabbing;
 }
 video {
