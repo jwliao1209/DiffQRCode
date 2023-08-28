@@ -29,18 +29,18 @@
 }
 .footer {
   position: relative;
-  color: white;
+  color: var(--color-text-accent);
   background-image: url(/images/backgrounds/footer.jpg);
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  background-color: #153146;
+  background-color: var(--color-background-accent);
   margin-top: 100px;
   min-height: 300px;
   width: 100vw;
 }
 .footer a {
-  color: white;
+  color: var(--color-text-accent);
 }
 .content {
   position: relative;

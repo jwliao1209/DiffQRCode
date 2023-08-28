@@ -6,7 +6,7 @@
 
 <style scoped>
 .main {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2em
 }
