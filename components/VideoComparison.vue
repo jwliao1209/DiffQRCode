@@ -67,7 +67,7 @@ function setupSlider () {
 </script>
 <template>
 <div class="video-and-canvas">
-  <video ref="video" poster="" loop muted playsinline @timeupdate="setupSlider">
+  <video ref="video" poster="" loop muted autoplay playsinline @timeupdate="setupSlider">
     <source :src="props.url" />
   </video>
   <canvas ref="canvas"></canvas>
@@ -97,7 +97,9 @@ video {
 .video-and-canvas {
   position: relative;
 }
+/*
 canvas {
   border: solid;
 }
+*/
 </style>

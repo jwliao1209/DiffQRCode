@@ -13,9 +13,9 @@ const config = reactive({
     { text: 'Research Center for Information Technology Innovation, Academia Sinica', mark: '' }
   ],
   links: [
-    { text: 'Paper', url: '/medm.pdf', icon: '' },
-    { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: '' },
-    { text: 'Code', url: '', icon: '' },
+    { text: 'Paper', url: '/medm.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
+    { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: ['ai', 'ai-arxiv'] },
+    { text: 'Code', url: '', icon: ['fa-brands', 'fa-github'] },
   ],
 })
 
@@ -40,9 +40,12 @@ const config = reactive({
     </div>
 
     <div class="link-list">
-      <div v-for="link in config.links">
-        <a :href="link.url" target="_blank">{{ link.text }}</a>
-      </div>
+      <a :href="link.url" target="_blank" v-for="link in config.links">
+        <div>
+          <i :class="link.icon"></i>
+          {{ link.text }}
+        </div>
+      </a>
     </div>
   </div>
 </template>
@@ -51,35 +54,33 @@ const config = reactive({
 .header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2em
+  padding: 2rem
 }
 .title {
   font-weight: 500;
-  font-size: 2.6rem;
+  font-size: 2.1rem;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 .author-list, .affiliation-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  column-gap: 30px;
-  font-size: 1.5rem;
+  column-gap: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 .author-list > div {
   white-space: nowrap;
 }
 
-@media (max-width: 814px) {
+@media (max-width: 850px) {
   .title :deep(div) {
     font-size: 1.2rem;
-  }
-  .author-list, .affiliation-list {
-    font-size: 1.2rem;
+    color: var(--color-text-mute);
   }
 }
-@media (min-width: 815px) {
+@media (min-width: 850px) {
   .title :deep(div) {
     display: inline;
     font-weight: inherit;
@@ -91,21 +92,33 @@ const config = reactive({
 }
 
 .link-list {
-  margin-top: 30px;
+  margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  column-gap: 30px;
-  font-size: 1.7rem;
+  gap: 1rem 2rem;
+  font-size: 1.2rem;
+  > a:after {
+    all: initial;
+  }
+  > a > div {
+    background-color: var(--color-background-accent);
+    padding: 0 1.3rem;
+    border-radius: 100px;
+    color: var(--color-text-accent);
+    transition: transform .2s;
+  }
+  > a > div:hover {
+    transform: scale(1.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    > a > div {
+      border: 1px solid white;
+    }
+  }
 }
-.link-list > div {
-  background-color: var(--color-background-accent);
-}
-.link-list > div > a {
-  color: var(--color-text-accent);
-}
-.link-list > div > a:after {
-  all: initial;
+i {
+  margin-right: 0.1rem;
 }
 </style>
 

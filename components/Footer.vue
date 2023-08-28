@@ -37,7 +37,8 @@
   background-color: var(--color-background-accent);
   margin-top: 100px;
   min-height: 300px;
-  width: 100vw;
+  width: calc(100vw - var(--scrollbarWidth));
+  max-width:100%;
 }
 .footer a {
   color: var(--color-text-accent);

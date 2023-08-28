@@ -1,5 +1,19 @@
 @import './base.css';
 
+:root {
+  font-size: 20px;
+}
+@media (max-width: 850px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media (max-width: 450px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
