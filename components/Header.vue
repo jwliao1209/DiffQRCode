@@ -98,23 +98,23 @@ const config = reactive({
   justify-content: center;
   gap: 1rem 2rem;
   font-size: 1.2rem;
-  > a:after {
-    all: initial;
-  }
-  > a > div {
-    background-color: var(--color-background-accent);
-    padding: 0 1.3rem;
-    border-radius: 100px;
-    color: var(--color-text-accent);
-    transition: transform .2s;
-  }
-  > a > div:hover {
-    transform: scale(1.05);
-  }
-  @media (prefers-color-scheme: dark) {
-    > a > div {
-      border: 1px solid white;
-    }
+}
+.link-list > a:after {
+  all: initial;
+}
+.link-list > a > div {
+  background-color: var(--color-background-accent);
+  padding: 0.2rem 1.3rem;
+  border-radius: 100px;
+  color: var(--color-text-accent);
+  transition: transform .2s;
+}
+.link-list > a > div:hover {
+  transform: scale(1.05);
+}
+@media (prefers-color-scheme: dark) {
+.link-list > a > div {
+    border: 1px solid white;
   }
 }
 i {

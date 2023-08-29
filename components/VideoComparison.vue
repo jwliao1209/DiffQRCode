@@ -1,7 +1,7 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 const props = defineProps(['url'])
 
 Number.prototype.clamp = function (min, max) {
@@ -10,7 +10,29 @@ Number.prototype.clamp = function (min, max) {
 
 const video = ref(null)
 const canvas = ref(null)
+const showLoadingMask = ref(false)
 let rendered = false
+
+onMounted(() => {
+  // %%%%%%% Draw video poster onto canvas before video loaded %%%%%%%
+  const poster = new Image()
+  poster.onload = () => {
+    const position = 0.5
+    const width = poster.width / 2
+    const height = poster.height
+    canvas.value.width  = width
+    canvas.value.height = height
+    const context = canvas.value.getContext("2d")
+    context.drawImage(poster, 0, 0, width, height, 0, 0, width, height)
+    const compX = (width * position).clamp(0.0, width)
+    const compW = (width - (width * position)).clamp(0.0, width)
+    context.drawImage(poster, compX + width, 0, compW, height, compX, 0, compW, height)
+
+    showLoadingMask.value = true
+  }
+  poster.src = video.value.getAttribute('poster')
+})
+
 function setupSlider () {
   // we have to make this function triggered on `timeupdate`
   // if we use `play` event, vue sometimes fails to capture the event during
@@ -42,6 +64,7 @@ function setupSlider () {
       canvas.value.addEventListener("touchstart", trackLocationTouch, false)
       canvas.value.addEventListener("touchmove",  trackLocationTouch, false)
 
+    showLoadingMask.value = false
     // %%%%%%% Draw video onto canvas %%%%%%%
     function drawLoop () {
       context.drawImage(video.value, 0, 0, width, height, 0, 0, width, height)
@@ -56,7 +79,7 @@ function setupSlider () {
       context.lineTo(width * position, height)
       context.closePath()
       context.strokeStyle = "#444444"
-      context.lineWidth = 3            
+      context.lineWidth = 5            
       context.stroke()
     }
     requestAnimationFrame(drawLoop)
@@ -67,8 +90,13 @@ function setupSlider () {
 </script>
 <template>
 <div class="video-and-canvas">
-  <video ref="video" poster="" loop muted autoplay playsinline @timeupdate="setupSlider">
-    <source :src="props.url" />
+  <Transition name="zoom-fade">
+  <div v-if="showLoadingMask" class="loading">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </div>
+  </Transition>
+  <video ref="video" :poster="`${props.url}.jpg`" loop muted autoplay playsinline @timeupdate="setupSlider">
+    <source :src="`${props.url}.mp4`" />
   </video>
   <canvas ref="canvas"></canvas>
 </div>
@@ -96,10 +124,34 @@ video {
 }
 .video-and-canvas {
   position: relative;
+  overflow: hidden;
+  line-height: 0;
 }
 /*
 canvas {
   border: solid;
 }
 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.loading > i {
+  font-size: 3rem;
+}
+
+.zoom-fade-leave-active {
+  transition: all .5s ease-in;
+}
+.zoom-fade-leave-to {
+  transform: scale(2);
+  opacity: 0;
+}
 </style>

@@ -20,6 +20,6 @@ onMounted(() => {
 <style>
 @import url("~/assets/css/main.css");
 @import url("https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+@import url("https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css");
 </style>
 
