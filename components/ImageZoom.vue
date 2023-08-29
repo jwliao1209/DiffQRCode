@@ -3,7 +3,7 @@
 import {  watch, type ImgHTMLAttributes, type ComponentPublicInstance } from 'vue'
 import mediumZoom, { type Zoom, type ZoomOptions } from 'medium-zoom'
 
-interface Props extends ImgHTMLAttributes {
+interface Props extends /* @vue-ignore */ ImgHTMLAttributes {
   options?: ZoomOptions
 }
 
@@ -39,3 +39,11 @@ watch(() => props.options, (options) => {
 <template>
   <img :ref="attachZoom" />
 </template>
+
+<style>
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 999;
+}
+</style>
+
