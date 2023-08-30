@@ -107,11 +107,16 @@ const config = reactive({
   color: var(--color-text-accent);
   transition: transform .2s;
 }
-.link-list > a > div:hover {
+@media (hover: hover) {
+  .link-list > a > div:hover {
+    transform: scale(1.05);
+  }
+}
+.link-list > a > div:active {
   transform: scale(1.05);
 }
 @media (prefers-color-scheme: dark) {
-.link-list > a > div {
+  .link-list > a > div {
     border: 1px solid white;
   }
 }

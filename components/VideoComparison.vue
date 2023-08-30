@@ -1,6 +1,9 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
-const props = defineProps(['url'])
+const props = defineProps({
+  url: String,
+  autoplay: { default: true },
+})
 
 Number.prototype.clamp = function (min, max) {
   return Math.min(Math.max(this, min), max)
@@ -39,6 +42,10 @@ function setupSlider () {
     return
   }
   rendered = true
+
+  if (!props.autoplay) {
+    video.value.pause()
+  }
 
   let position = 0.5
   const width = video.value.videoWidth / 2

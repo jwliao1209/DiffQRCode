@@ -45,6 +45,9 @@ a:after {
     top: 0%;
   }
 }
+a:active:after {
+  top: 0%;
+}
 
 @media (min-width: 1024px) {
   body {

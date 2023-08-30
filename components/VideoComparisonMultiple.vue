@@ -1,157 +1,33 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
-const props = defineProps(['urls'])
-
-Number.prototype.clamp = function (min, max) {
-  return Math.min(Math.max(this, min), max)
-}
-
-const videos = ref([])
-const canvases = ref([])
-const showLoadingMask = ref(false)
-let rendered = false
-
-onMounted(() => {
-  // %%%%%%% Draw video poster onto canvas before video loaded %%%%%%%
-  const poster = new Image()
-  poster.onload = () => {
-    const position = 0.5
-    const width = poster.width / 2
-    const height = poster.height
-    canvas.value.width  = width
-    canvas.value.height = height
-    const context = canvas.value.getContext("2d")
-    context.drawImage(poster, 0, 0, width, height, 0, 0, width, height)
-    const compX = (width * position).clamp(0.0, width)
-    const compW = (width - (width * position)).clamp(0.0, width)
-    context.drawImage(poster, compX + width, 0, compW, height, compX, 0, compW, height)
-
-    showLoadingMask.value = true
-  }
-  poster.src = video.value.getAttribute('poster')
+const props = defineProps({
+  urls: Array,
+  captions: Array,
 })
 
-function setupSlider (index) {
-  // we have to make this function triggered on `timeupdate`
-  // if we use `play` event, vue sometimes fails to capture the event during
-  //   local development (probably because the video plays before vue is instantiated)
-  if (rendered) {
-    return
-  }
-  rendered = true
-
-  let position = 0.5
-  const width = video.value.videoWidth / 2
-  const height = video.value.videoHeight
-  canvas.value.width  = width
-  canvas.value.height = height
-  const context = canvas.value.getContext("2d")
-  if (video.value.readyState > 3) {
-      // %%%%%%% Interactive %%%%%%%
-      function trackLocation (e) {
-        // Normalize to [0, 1]
-        const bcr = canvas.value.getBoundingClientRect()
-        position = ((e.pageX - bcr.x) / bcr.width)
-      }
-      function trackLocationTouch (e) {
-        // Normalize to [0, 1]
-        const bcr = canvas.value.getBoundingClientRect()
-        position = ((e.touches[0].pageX - bcr.x) / bcr.width)
-      }
-      canvas.value.addEventListener("mousemove",  trackLocation, false) 
-      canvas.value.addEventListener("touchstart", trackLocationTouch, false)
-      canvas.value.addEventListener("touchmove",  trackLocationTouch, false)
-
-    showLoadingMask.value = false
-    // %%%%%%% Draw video onto canvas %%%%%%%
-    function drawLoop () {
-      context.drawImage(video.value, 0, 0, width, height, 0, 0, width, height)
-      const compX = (width * position).clamp(0.0, width)
-      const compW = (width - (width * position)).clamp(0.0, width)
-      context.drawImage(video.value, compX + width, 0, compW, height, compX, 0, compW, height)
-      requestAnimationFrame(drawLoop)
-
-      // %%%%%%% Draw split line %%%%%%%
-      context.beginPath()
-      context.moveTo(width * position, 0)
-      context.lineTo(width * position, height)
-      context.closePath()
-      context.strokeStyle = "#B3993B"
-      context.lineWidth = 5            
-      context.stroke()
-    }
-    requestAnimationFrame(drawLoop)
-
-  }
-}
-
+console.assert(
+  !(props.urls && props.captions && props.urls.length !== props.captions.length),
+  'passed urls and captions should have the same length'
+)
 </script>
-<template>
-<div class="video-and-canvas">
-  <Transition name="zoom-fade">
-  <div v-if="showLoadingMask" class="loading">
-    <i class="fa-solid fa-spinner fa-spin"></i>
-  </div>
-  </Transition>
-  <div v-for="(url, index) in props.urls">
-    <video ref="videos" :poster="`${url}.jpg`" loop muted autoplay playsinline @timeupdate="setupSlider(index)">
-      <source :src="`${url}.mp4`" />
-    </video>
-    <canvas ref="canvases"></canvas>
-  </div>
-</div>
 
+<template>
+  <div>
+    <div class="main">
+      <div class="video" v-for="(url, index) in props.urls">
+        {{ props.captions[index] }}
+        <VideoComparison :url="url" :autoplay="false" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-canvas {
-  width: 100%;
-  cursor: grabbing;
-}
-video {
-  /*
-    Hide video without stopping it.
-    Most of the browsers pause the video when it goes out of view.
-    So we make it positioned at the middle of the canvas, vertically,
-    and use negative z-index to hide it.
-    Additionally, the video has to take up some pixels to be played by the browsers,
-    so we make its height 1px.
-  */
-  position: absolute;
-  top: 50%;
-  z-index: -1;
-  height: 1px;
-}
-.video-and-canvas {
-  position: relative;
-  overflow: hidden;
-  line-height: 0;
-}
-/*
-canvas {
-  border: solid;
-}
-*/
-.loading {
+.main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: color-mix(in srgb, var(--color-background) 65%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  gap: 0.5rem;
 }
-.loading > i {
-  font-size: 3rem;
-}
-
-.zoom-fade-leave-active {
-  transition: all .5s ease-in;
-}
-.zoom-fade-leave-to {
-  transform: scale(2);
-  opacity: 0;
+.video {
+  text-align: center;
 }
 </style>

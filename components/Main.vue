@@ -15,6 +15,7 @@ const imageOverlayColor = computed(() => {
   return color
 })
 
+const showGirlVideo = ref(false)
 </script>
 
 <template>
@@ -30,11 +31,27 @@ const imageOverlayColor = computed(() => {
     </p>
     <div class="image">
       <ImageZoom src="/images/girl.jpg" :options="{ background: imageOverlayColor }" />
-      <div class="caption">We extract a 20-pixel-wide vertical segment of pixels from each generated frame and stack them horizontally. MeDM produces fluent videos which reconstruct stripe-free images. <a>Show video.</a></div>
+      <div class="caption">We extract a 20-pixel-wide vertical segment of pixels from each generated frame and stack them horizontally. MeDM produces fluent videos which reconstruct stripe-free images.
+        <a @click="showGirlVideo = !showGirlVideo">
+        <template v-if="!showGirlVideo">Show</template>
+        <template v-else>Hide</template>
+        video.</a>
+      </div>
     </div>
-    <!--
-    <VideoComparisonMultiple :url="['/videos/girl/cn-medm']" />
-    -->
+    <VideoComparisonMultiple v-if="showGirlVideo"
+      :urls="[
+        '/videos/girl/sde',
+        '/videos/girl/cn',
+        '/videos/girl/sde-medm',
+        '/videos/girl/cn-medm'
+      ]"
+      :captions="[
+        'SDEdit',
+        'ControlNet',
+        'MeDM + SDEdit',
+        'MeDM + ControlNet',
+      ]"
+    />
 
     <div class="section-title">Architecture</div>
     <div class="image">
