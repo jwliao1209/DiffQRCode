@@ -1,13 +1,13 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
-const props = defineProps(['url'])
+const props = defineProps(['urls'])
 
 Number.prototype.clamp = function (min, max) {
   return Math.min(Math.max(this, min), max)
 }
 
-const video = ref(null)
-const canvas = ref(null)
+const videos = ref([])
+const canvases = ref([])
 const showLoadingMask = ref(false)
 let rendered = false
 
@@ -31,7 +31,7 @@ onMounted(() => {
   poster.src = video.value.getAttribute('poster')
 })
 
-function setupSlider () {
+function setupSlider (index) {
   // we have to make this function triggered on `timeupdate`
   // if we use `play` event, vue sometimes fails to capture the event during
   //   local development (probably because the video plays before vue is instantiated)
@@ -93,10 +93,12 @@ function setupSlider () {
     <i class="fa-solid fa-spinner fa-spin"></i>
   </div>
   </Transition>
-  <video ref="video" :poster="`${props.url}.jpg`" loop muted autoplay playsinline @timeupdate="setupSlider">
-    <source :src="`${props.url}.mp4`" />
-  </video>
-  <canvas ref="canvas"></canvas>
+  <div v-for="(url, index) in props.urls">
+    <video ref="videos" :poster="`${url}.jpg`" loop muted autoplay playsinline @timeupdate="setupSlider(index)">
+      <source :src="`${url}.mp4`" />
+    </video>
+    <canvas ref="canvases"></canvas>
+  </div>
 </div>
 
 </template>

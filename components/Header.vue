@@ -1,6 +1,4 @@
 <script setup>
-import { reactive } from 'vue'
-
 const config = reactive({
   title: 'MeDM<div>Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance</div>',
   authors: [

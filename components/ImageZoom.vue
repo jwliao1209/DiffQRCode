@@ -44,6 +44,18 @@ watch(() => props.options, (options) => {
 .medium-zoom-overlay,
 .medium-zoom-image--opened {
   z-index: 999;
+  border-radius: 0;
+  border: initial;
+}
+img {
+  border-radius: 0.3rem;
+  width: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  img {
+    border: solid 0.1rem #ddd;
+  }
 }
 </style>
 
