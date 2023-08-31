@@ -27,6 +27,7 @@ a {
   text-decoration: none;
   position: relative;
   white-space: nowrap;
+  cursor: pointer;
 }
 a:after {
   content: '';

@@ -40,7 +40,7 @@ watch(() => props.options, (options) => {
   <img :ref="attachZoom" />
 </template>
 
-<style>
+<style scoped>
 .medium-zoom-overlay,
 .medium-zoom-image--opened {
   z-index: 999;
@@ -48,7 +48,7 @@ watch(() => props.options, (options) => {
   border: initial;
 }
 img {
-  border-radius: 0.3rem;
+  border-radius: 5px;
   width: 100%;
 }
 

@@ -1,9 +1,16 @@
 <script setup>
 // Partly ported from http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
 const props = defineProps({
-  url: String,
-  autoplay: { default: true },
+  url: {
+    type: String,
+    required: true,
+  },
+  noautoplay: Boolean,
+  playOnChange: Boolean,
+  syncSlider: Boolean,
+  sliderPosition: Number,
 })
+const emit = defineEmits(['ready', 'sliderPositionChange' ])
 
 Number.prototype.clamp = function (min, max) {
   return Math.min(Math.max(this, min), max)
@@ -14,7 +21,15 @@ const canvas = ref(null)
 const showLoadingMask = ref(false)
 let rendered = false
 
+watch(() => props.playOnChange, (newVal, oldVal) => {
+  if (newVal) {
+    video.value.play()
+  } 
+})
+
 onMounted(() => {
+  canvas.value.height = 0
+
   // %%%%%%% Draw video poster onto canvas before video loaded %%%%%%%
   const poster = new Image()
   poster.onload = () => {
@@ -43,9 +58,15 @@ function setupSlider () {
   }
   rendered = true
 
-  if (!props.autoplay) {
+  if (props.noautoplay) {
+    if (video.value === null) {
+      // the component is being unmounted
+      return
+    }
     video.value.pause()
   }
+
+  emit('ready', props.url)
 
   let position = 0.5
   const width = video.value.videoWidth / 2
@@ -55,15 +76,20 @@ function setupSlider () {
   const context = canvas.value.getContext("2d")
   if (video.value.readyState > 3) {
       // %%%%%%% Interactive %%%%%%%
+      function emitPosition () {
+        if (props.syncSlider) { emit('sliderPositionChange', position) }
+      }
       function trackLocation (e) {
         // Normalize to [0, 1]
         const bcr = canvas.value.getBoundingClientRect()
         position = ((e.pageX - bcr.x) / bcr.width)
+        emitPosition()
       }
       function trackLocationTouch (e) {
         // Normalize to [0, 1]
         const bcr = canvas.value.getBoundingClientRect()
         position = ((e.touches[0].pageX - bcr.x) / bcr.width)
+        emitPosition()
       }
       canvas.value.addEventListener("mousemove",  trackLocation, false) 
       canvas.value.addEventListener("touchstart", trackLocationTouch, false)
@@ -72,11 +98,15 @@ function setupSlider () {
     showLoadingMask.value = false
     // %%%%%%% Draw video onto canvas %%%%%%%
     function drawLoop () {
+      if (video.value === null) {
+        // the component is being unmounted
+        return
+      }
+      if (props.syncSlider) { position = props.sliderPosition } 
       context.drawImage(video.value, 0, 0, width, height, 0, 0, width, height)
       const compX = (width * position).clamp(0.0, width)
       const compW = (width - (width * position)).clamp(0.0, width)
       context.drawImage(video.value, compX + width, 0, compW, height, compX, 0, compW, height)
-      requestAnimationFrame(drawLoop)
 
       // %%%%%%% Draw split line %%%%%%%
       context.beginPath()
@@ -86,9 +116,10 @@ function setupSlider () {
       context.strokeStyle = "#B3993B"
       context.lineWidth = 5            
       context.stroke()
+
+      requestAnimationFrame(drawLoop)
     }
     requestAnimationFrame(drawLoop)
-
   }
 }
 
@@ -131,6 +162,7 @@ video {
   position: relative;
   overflow: hidden;
   line-height: 0;
+  border-radius: 5px;
 }
 /*
 canvas {

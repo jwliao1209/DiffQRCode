@@ -16,6 +16,20 @@ const imageOverlayColor = computed(() => {
 })
 
 const showGirlVideo = ref(false)
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
 </script>
 
 <template>
@@ -48,8 +62,8 @@ const showGirlVideo = ref(false)
       :captions="[
         'SDEdit',
         'ControlNet',
-        'MeDM + SDEdit',
-        'MeDM + ControlNet',
+        'SDEdit + MeDM',
+        'ControlNet + MeDM',
       ]"
     />
 
@@ -58,6 +72,35 @@ const showGirlVideo = ref(false)
       <ImageZoom src="/images/system-diagram.jpg" :options="{ background: imageOverlayColor }" />
       <div class="caption">MeDM mediates independent image score estimations after every denoising step. Inspired by the fact that video pixels are essentially views to the underlying objects, we construct an explicit pixel repository <LatexR /> to represent the underlying world. For more details, please refer to our <a href="/medm.pdf" target="_blank">paper</a>.</div>
     </div>
+
+    <div class="section-title">Video Rendering</div>
+    <Gallery
+      :urls="shuffle([
+        '/videos/rendering/ambush_7',
+        '/videos/rendering/bandage_2',
+        '/videos/rendering/market_5',
+        '/videos/rendering/shaman_3',
+        '/videos/rendering/cave_2',
+        '/videos/rendering/market_6',
+        '/videos/rendering/temple_2',
+      ])"
+    />
+
+    <Gallery
+      :urls="shuffle([
+        '/videos/assistive-rendering/ambush_7',
+        '/videos/assistive-rendering/bandage_2',
+        '/videos/assistive-rendering/market_5',
+        '/videos/assistive-rendering/ambush_4',
+        '/videos/assistive-rendering/ambush_6',
+        '/videos/assistive-rendering/shaman_2',
+        '/videos/assistive-rendering/temple_3',
+      ])"
+    />
+
+    <div class="section-title">Text-Guided Video Edit</div>
+
+    <div class="section-title">Video Anonymization</div>
   </div>
 </template>
 
