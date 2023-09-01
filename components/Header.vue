@@ -13,7 +13,7 @@ const config = reactive({
   links: [
     { text: 'Paper', url: '/medm.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
     { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: ['ai', 'ai-arxiv'] },
-    { text: 'Code', url: '', icon: ['fa-brands', 'fa-github'] },
+    { text: 'Code', url: '/code.html', icon: ['fa-brands', 'fa-github'] },
   ],
 })
 

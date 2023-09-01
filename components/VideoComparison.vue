@@ -114,7 +114,7 @@ function setupSlider () {
       context.lineTo(width * position, height)
       context.closePath()
       context.strokeStyle = "#B3993B"
-      context.lineWidth = 5            
+      context.lineWidth = Math.round(width / 200)            
       context.stroke()
 
       requestAnimationFrame(drawLoop)

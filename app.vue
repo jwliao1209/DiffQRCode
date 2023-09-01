@@ -1,6 +1,18 @@
 <script setup>
 useHead({
   title: 'MeDM',
+  meta: [
+    { name: 'description', content: 'MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance' }
+  ],
+})
+
+useSeoMeta({
+  title: 'MeDM',
+  ogTitle: 'MeDM',
+  description: 'MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance',
+  ogDescription: 'MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance',
+  ogImage: 'https://medm2023.github.io/images/system-diagram.jpg',
+  twitterCard: 'summary_large_image',
 })
 
 onMounted(() => {

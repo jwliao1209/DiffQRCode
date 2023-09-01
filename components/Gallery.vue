@@ -53,16 +53,16 @@ useResizeObserver(main, () => setHeight())
 
 <style scoped>
 .tab-list {
-  margin-top: 0.6rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
 }
 .tab-list > div {
-  width: 1.5%;
-  aspect-ratio: 1/1;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 50%;
   background-color: rgba(193, 193, 198, 0.655);
-  margin: 0 0.3%;
+  margin: 0 0.3rem;
   cursor: pointer;
   transition: transform .1s;
   transition: background-color .5s;

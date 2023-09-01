@@ -74,6 +74,9 @@ function shuffle(array) {
     </div>
 
     <div class="section-title">Video Rendering</div>
+    <p>
+      MeDM is capable of efficiently rendering high quality videos solely from 3D assets, including optical flows, occlusions and position information (depth, normal). We use the lineart derived from the normal maps as the input conditions to ControlNet.
+    </p>
     <Gallery
       :urls="shuffle([
         '/videos/rendering/ambush_7',
@@ -86,6 +89,9 @@ function shuffle(array) {
       ])"
     />
 
+    <p>
+      In addition, MeDM can also begin with adding noise to the pre-rendered videos and perform the denoising process from 0.5T step following SDEdit. The generated video should be similar to the original animation and incorporating the realistic prior from the pre-trained DM (The difference is especially significant in complex texture, such as hair). More quantitative results, including comparison with prior works, can be found in our <a href="/medm.pdf" target="_blank">paper</a>. 
+    </p>
     <Gallery
       :urls="shuffle([
         '/videos/assistive-rendering/ambush_7',
@@ -99,8 +105,33 @@ function shuffle(array) {
     />
 
     <div class="section-title">Text-Guided Video Edit</div>
+    <p>
+      MeDM also performs well without high precision optical flows. We demonstrate this by applying text-guided video editing on real-world videos in DAVIS 2016.
+    </p>
+
+    <Gallery
+      :urls="shuffle([
+        '/videos/edit/bear',
+        '/videos/edit/blackswan',
+        '/videos/edit/boat',
+        '/videos/edit/flamingo',
+      ])"
+    />
 
     <div class="section-title">Video Anonymization</div>
+    <p>
+      Finally, we demonstrate the versatility of MeDM. For example, MeDM can perform video anonymization out-of-the-box. We leverage the fact that human visual perception exhibits a remarkable sensitivity to human faces while our ability to detect and recognize other objects is not as specialized. We add noise to a video with a strength of 0.5T, which is strong enough to erase the identity while preserving other objects and the background scene, and perform denoising using MeDM to obtain the anonymized video. Text conditioning can also be injected to enable a more targeted identity modification.
+    </p>
+    <Gallery
+      :urls="shuffle([
+        '/videos/anonymization/anna-kendrick',
+        '/videos/anonymization/chris-hemsworth',
+        '/videos/anonymization/mark-zuckerberg',
+        '/videos/anonymization/bill-gates',
+        '/videos/anonymization/dicaprio-n-obama',
+      ])"
+    />
+
   </div>
 </template>
 
