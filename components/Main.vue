@@ -75,7 +75,7 @@ function shuffle(array) {
 
     <div class="section-title">Video Rendering</div>
     <p>
-      MeDM is capable of efficiently rendering high quality videos solely from 3D assets, including optical flows, occlusions and position information (depth, normal). We use the lineart derived from the normal maps as the input conditions to ControlNet.
+    MeDM is capable of efficiently rendering high quality videos solely from 3D assets, including optical flows, occlusions and position information (depth, normal). We use the lineart derived from the normal maps as the input conditions to ControlNet. 3D assets from <a href="http://sintel.is.tue.mpg.de" target="_blank">MPI Sintel</a>.
     </p>
     <Gallery
       :urls="shuffle([
@@ -103,24 +103,29 @@ function shuffle(array) {
         '/videos/assistive-rendering/temple_3',
       ])"
     />
-
-    <div class="section-title">Text-Guided Video Edit</div>
+<div class="section-title">Text-Guided Video Edit</div>
     <p>
-      MeDM also performs well without high precision optical flows. We demonstrate this by applying text-guided video editing on real-world videos in DAVIS 2016.
+      MeDM also performs well without high precision optical flows. We demonstrate this by applying text-guided video editing on real-world videos in <a href="https://davischallenge.org/davis2016/code.html" target="_blank">DAVIS 2016</a>.
     </p>
 
     <Gallery
-      :urls="shuffle([
+      :urls="[
         '/videos/edit/bear',
         '/videos/edit/blackswan',
         '/videos/edit/boat',
         '/videos/edit/flamingo',
-      ])"
+      ]"
+      :captions="[
+        'Prompt: a panda in Arctic, snow, ice, iceberg',
+        'Prompt: a white swan in the ocean, snowing',
+        'Prompt: a boat on fire',
+        'Prompt: flamingos in outer space',
+      ]"
     />
 
     <div class="section-title">Video Anonymization</div>
     <p>
-      Finally, we demonstrate the versatility of MeDM. For example, MeDM can perform video anonymization out-of-the-box. We leverage the fact that human visual perception exhibits a remarkable sensitivity to human faces while our ability to detect and recognize other objects is not as specialized. We add noise to a video with a strength of 0.5T, which is strong enough to erase the identity while preserving other objects and the background scene, and perform denoising using MeDM to obtain the anonymized video. Text conditioning can also be injected to enable a more targeted identity modification.
+      Finally, we demonstrate the versatility of MeDM. For example, MeDM can perform video anonymization out-of-the-box. We leverage the fact that human visual perception exhibits a remarkable sensitivity to human faces while our ability to detect and recognize other objects is not as specialized. We add noise to a video with a strength of 0.5T, which is strong enough to erase the identity while preserving other objects and the background scene, and perform denoising using MeDM to obtain the anonymized video. Text conditioning can also be injected to enable a more targeted identity modification. Celebrity videos from <a href="https://celebv-hq.github.io" target="_blank">CelebV-HQ</a>.
     </p>
     <Gallery
       :urls="shuffle([

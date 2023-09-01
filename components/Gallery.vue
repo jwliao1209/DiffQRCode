@@ -1,12 +1,18 @@
 <script setup>
-import { useResizeObserver } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
 
 const props = defineProps({
   urls: {
     tyle: Array,
     required: true,
-  }
+  },
+  captions: Array,
 })
+
+console.assert(
+  !(props.urls && props.captions && props.urls.length !== props.captions.length),
+  'passed urls and captions should have the same length'
+)
 
 const videoIndex = ref(0)
 
@@ -20,26 +26,28 @@ function incrementIndex (val) {
 }
 
 // set a dynamic min-height to prevent flickering on tab switches.
+const { width } = useWindowSize()
 const minHeight = ref('0px')
-const main = ref(null)
+const video = ref(null)
 function setHeight () {
   minHeight.value = '0px'
   nextTick(() => {
-    minHeight.value = getComputedStyle(main.value).getPropertyValue('height')
+    minHeight.value = getComputedStyle(video.value).getPropertyValue('height')
   })
 }
-useResizeObserver(main, () => setHeight())
+watch(width, () => setHeight())
 
 </script>
 
 <template>
 <div>
-  <div ref="main" class="main" :style="{ minHeight: minHeight }">
+  <div class="main">
     <div class="navigate-button left-button" @click="incrementIndex(-1)"></div>
-    <div class="video">
+    <div ref="video" class="video" :style="{ minHeight: minHeight }">
       <Transition name="fade" mode="out-in">
       <VideoComparison :key="videoIndex" :url="props.urls[videoIndex]" @ready="setHeight" />
       </Transition>
+      <div class="caption" v-if="props.captions">{{ props.captions[videoIndex] }}</div>
     </div>
     <div class="navigate-button right-button" @click="incrementIndex(1)"></div>
   </div>
@@ -90,6 +98,13 @@ useResizeObserver(main, () => setHeight())
 }
 .video {
   width: 86%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.video .caption {
+  width: 100%;
+  color: var(--color-text-mute);
 }
 .navigate-button {
   cursor: pointer;

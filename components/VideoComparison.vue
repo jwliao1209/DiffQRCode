@@ -33,6 +33,10 @@ onMounted(() => {
   // %%%%%%% Draw video poster onto canvas before video loaded %%%%%%%
   const poster = new Image()
   poster.onload = () => {
+    if (canvas.value === null) {
+      // the component is being unmounted
+      return
+    }
     const position = 0.5
     const width = poster.width / 2
     const height = poster.height
@@ -49,56 +53,58 @@ onMounted(() => {
   poster.src = video.value.getAttribute('poster')
 })
 
+let position = 0.5
+function emitPosition () {
+  if (props.syncSlider) { emit('sliderPositionChange', position) }
+}
+function trackLocation (e) {
+  // Normalize to [0, 1]
+  const bcr = canvas.value.getBoundingClientRect()
+  position = ((e.pageX - bcr.x) / bcr.width)
+  emitPosition()
+}
+function trackLocationTouch (e) {
+  // Normalize to [0, 1]
+  const bcr = canvas.value.getBoundingClientRect()
+  position = ((e.touches[0].pageX - bcr.x) / bcr.width)
+  emitPosition()
+}
 function setupSlider () {
   // we have to make this function triggered on `timeupdate`
   // if we use `play` event, vue sometimes fails to capture the event during
   //   local development (probably because the video plays before vue is instantiated)
+
+  if (video.value === null || canvas.value === null) {
+    // the component is being unmounted
+    return
+  }
+
   if (rendered) {
     return
   }
   rendered = true
 
   if (props.noautoplay) {
-    if (video.value === null) {
-      // the component is being unmounted
-      return
-    }
     video.value.pause()
   }
 
   emit('ready', props.url)
 
-  let position = 0.5
   const width = video.value.videoWidth / 2
   const height = video.value.videoHeight
   canvas.value.width  = width
   canvas.value.height = height
   const context = canvas.value.getContext("2d")
   if (video.value.readyState > 3) {
-      // %%%%%%% Interactive %%%%%%%
-      function emitPosition () {
-        if (props.syncSlider) { emit('sliderPositionChange', position) }
-      }
-      function trackLocation (e) {
-        // Normalize to [0, 1]
-        const bcr = canvas.value.getBoundingClientRect()
-        position = ((e.pageX - bcr.x) / bcr.width)
-        emitPosition()
-      }
-      function trackLocationTouch (e) {
-        // Normalize to [0, 1]
-        const bcr = canvas.value.getBoundingClientRect()
-        position = ((e.touches[0].pageX - bcr.x) / bcr.width)
-        emitPosition()
-      }
-      canvas.value.addEventListener("mousemove",  trackLocation, false) 
-      canvas.value.addEventListener("touchstart", trackLocationTouch, false)
-      canvas.value.addEventListener("touchmove",  trackLocationTouch, false)
+    // %%%%%%% Interactive %%%%%%%
+    canvas.value.addEventListener("mousemove",  trackLocation, false) 
+    canvas.value.addEventListener("touchstart", trackLocationTouch, false)
+    canvas.value.addEventListener("touchmove",  trackLocationTouch, false)
 
     showLoadingMask.value = false
     // %%%%%%% Draw video onto canvas %%%%%%%
     function drawLoop () {
-      if (video.value === null) {
+      if (video.value === null || canvas.value === null) {
         // the component is being unmounted
         return
       }
@@ -122,6 +128,12 @@ function setupSlider () {
     requestAnimationFrame(drawLoop)
   }
 }
+
+onBeforeUnmount(() => {
+  canvas.value.removeEventListener("mousemove",  trackLocation, false) 
+  canvas.value.removeEventListener("touchstart", trackLocationTouch, false)
+  canvas.value.removeEventListener("touchmove",  trackLocationTouch, false)
+})
 
 </script>
 <template>
