@@ -2,7 +2,14 @@
 useHead({
   title: 'MeDM',
   meta: [
-    { name: 'description', content: 'MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance' }
+    {
+      name: 'description',
+      content: 'MeDM: Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance',
+    },
+    {
+      name: "google-site-verification",
+      content: "I9VHWgYS9g3o8RUJ7ryB1hPoIcN9YK1bX1Ds7_uDIYE",
+    },
   ],
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1rem" height="0.8rem" viewBox="0 0 10 8" version="1.1">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 10 8" version="1.1">
   <defs>
   <g>
   <symbol overflow="visible" id="glyph0-0">
@@ -14,3 +14,8 @@
   </g>
   </svg>
 </template>
+<style scoped>
+svg {
+  width: 1rem;
+}
+</style>
