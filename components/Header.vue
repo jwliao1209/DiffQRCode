@@ -1,6 +1,7 @@
 <script setup>
 const config = reactive({
   title: 'MeDM<div>Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance</div>',
+  venue: 'AAAI 2024',
   authors: [
     { text: 'Ernie Chu', homepage: 'https://ernestchu.github.io', mark: '' },
     { text: 'Tzuhsuan Huang', homepage: '', mark: '' },
@@ -22,6 +23,8 @@ const config = reactive({
 <template>
   <div class="header">
     <div class="title" v-html="config.title"></div>
+
+    <div class="venue">{{ config.venue }}</div>
 
     <div class="author-list">
       <div v-for="author in config.authors">
@@ -58,7 +61,12 @@ const config = reactive({
   font-weight: 500;
   font-size: 2.1rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+.venue {
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
 }
 .author-list, .affiliation-list {
   display: flex;
@@ -124,4 +132,3 @@ i {
   margin-right: 0.1rem;
 }
 </style>
-
