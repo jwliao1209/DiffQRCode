@@ -13,8 +13,9 @@ const config = reactive({
   ],
   links: [
     { text: 'Paper', url: '/medm.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
+    { text: 'Poster', url: '/medm-poster.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
     { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: ['ai', 'ai-arxiv'] },
-    { text: 'Code (coming soon!)', url: 'https://github.com/aiiu-lab/MeDM', icon: ['fa-brands', 'fa-github'] },
+    { text: 'Code', url: 'https://github.com/aiiu-lab/MeDM', icon: ['fa-brands', 'fa-github'] },
   ],
 })
 
