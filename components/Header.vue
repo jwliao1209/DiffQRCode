@@ -12,7 +12,7 @@ const config = reactive({
     { text: 'Research Center for Information Technology Innovation, Academia Sinica', mark: '' }
   ],
   links: [
-    { text: 'Paper', url: '/medm.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
+    { text: 'Paper', url: 'https://doi.org/10.1609/aaai.v38i2.27899', icon: ['ai', 'ai-doi'] },
     { text: 'Poster', url: '/medm-poster.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
     { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: ['ai', 'ai-arxiv'] },
     { text: 'Code', url: 'https://github.com/aiiu-lab/MeDM', icon: ['fa-brands', 'fa-github'] },
