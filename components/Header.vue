@@ -3,20 +3,22 @@ const config = reactive({
   title: 'MeDM<div>Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance</div>',
   venue: 'AAAI 2024',
   authors: [
-    { text: 'Ernie Chu', homepage: 'https://ernestchu.github.io', mark: '' },
-    { text: 'Tzuhsuan Huang', homepage: '', mark: '' },
-    { text: 'Shuo-Yen Lin', homepage: '', mark: '' },
-    { text: 'Jun-Cheng Chen', homepage: 'https://www.citi.sinica.edu.tw/pages/pullpull', mark: '' },
+    { text: 'Jia-Wei Liao', homepage: 'https://jwliao1209.github.io/', mark: '' },
+    { text: 'Winston Wang', homepage: '', mark: '' },
+    { text: 'Tzu-Sian Wang', homepage: '', mark: '' },
+    { text: 'Li-Xuan Peng', homepage: '', mark: '' },
+    { text: 'Cheng-Fu Chou', homepage: '', mark: ''},
+    { text: 'Jun-Cheng Chen', homepage: 'https://www.citi.sinica.edu.tw/pages/pullpull/', mark: '' },
   ],
   affiliations: [
-    { text: 'Research Center for Information Technology Innovation, Academia Sinica', mark: '' }
+    { text: 'Research Center for Information Technology Innovation, Academia Sinica National Taiwan University', mark: '' }
   ],
   links: [
-    { text: 'Paper', url: 'https://doi.org/10.1609/aaai.v38i2.27899', icon: ['ai', 'ai-doi'] },
-    { text: 'Poster', url: '/medm-poster.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
-    { text: 'arXiv', url: 'https://arxiv.org/abs/2308.10079', icon: ['ai', 'ai-arxiv'] },
-    { text: 'Code', url: 'https://github.com/aiiu-lab/MeDM', icon: ['fa-brands', 'fa-github'] },
-    { text: 'Citation', url: 'https://github.com/aiiu-lab/MeDM?tab=readme-ov-file#citation', icon: ['fa-brands', 'fa-github'] },
+    // { text: 'Paper', url: 'https://doi.org/10.1609/aaai.v38i2.27899', icon: ['ai', 'ai-doi'] },
+    // { text: 'Poster', url: '/medm-poster.pdf', icon: ['fa-regular', 'fa-file-pdf'] },
+    { text: 'arXiv', url: 'https://arxiv.org/abs/2403.15878', icon: ['ai', 'ai-arxiv'] },
+    { text: 'Code', url: 'https://github.com/jwliao1209/DiffQRCode', icon: ['fa-brands', 'fa-github'] },
+    { text: 'Citation', url: 'https://github.com/jwliao1209/DiffQRCode', icon: ['fa-brands', 'fa-github'] },
   ],
 })
 
