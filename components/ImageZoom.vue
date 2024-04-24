@@ -48,14 +48,14 @@ watch(() => props.options, (options) => {
   border: initial;
 }
 img {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   width: 100%;
 }
 
 @media (prefers-color-scheme: light) {
-  img {
+  /* img {
     border: solid 0.1rem #ddd;
-  }
+  } */
 }
 </style>
 
