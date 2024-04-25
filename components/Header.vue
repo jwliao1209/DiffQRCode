@@ -1,6 +1,6 @@
 <script setup>
 const config = reactive({
-  title: 'MeDM<div>Mediating Image Diffusion Models for Video-to-Video Translation with Temporal Correspondence Guidance</div>',
+  title: 'Diffusion-based Aesthetic QR Code Generation via Scanning-Robust Perceptual Guidance',
   venue: 'AAAI 2024',
   authors: [
     { text: 'Jia-Wei Liao', homepage: 'https://jwliao1209.github.io/', mark: '' },
