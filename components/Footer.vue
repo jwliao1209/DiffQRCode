@@ -2,13 +2,13 @@
 <div class="footer">
   <div class="content">
     <div class="logo">
-      <img src="/images/logos/as-white.png" alt="">
+      <ImageZoom src="images/logos/as-white.png" :options="{ background: imageOverlayColor }" />
     </div>
     <div>
       This website is licensed under a Creative Commons Attribution-ShareAlike 4.0 International <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a>.
       <br />
       <br />
-      This means you are free to borrow the <a href="https://github.com/medm2023/medm2023.github.io" target="_blank">source code</a> of this website, we just ask that you link back to this page in the footer. However, the copyright to the logo of Academia Sinica and the footer theme is reserved. Please remove them if your are not affiliated with Academia Sinica.
+      This means you are free to borrow the <a href="https://github.com/jwliao1209/DiffQRCode" target="_blank">source code</a> of this website, we just ask that you link back to this page in the footer. However, the copyright to the logo of Academia Sinica and the footer theme is reserved. Please remove them if your are not affiliated with Academia Sinica.
     </div>
   </div>
 </div>
