@@ -2,7 +2,7 @@
 
 ### Diffusion-based Aesthetic QR Code Generation via Scanning-Robust Perceptual Guidance [[arXiv](https://arxiv.org/abs/2403.15878)]
 
-This repository contains the source code for [DiffQRCode website]().
+This repository contains the source code for [DiffQRCode website](https://jwliao1209.github.io/DiffQRCode/).
 
 The website leverages the latest Web Technologies: [Vue](https://vuejs.org) and [Nuxt](https://nuxt.com). The former let you develop with ease, and the latter provides the best-in-class SEO to make your project spread.
 
