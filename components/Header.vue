@@ -1,7 +1,7 @@
 <script setup>
 const config = reactive({
   title: 'Diffusion-based Aesthetic QR Code Generation via Scanning-Robust Perceptual Guidance',
-  venue: 'AAAI 2024',
+  venue: '',
   authors: [
     { text: 'Jia-Wei Liao', homepage: 'https://jwliao1209.github.io/', mark: '' },
     { text: 'Winston Wang', homepage: '', mark: '' },
