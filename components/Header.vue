@@ -1,17 +1,19 @@
 <script setup>
 const config = reactive({
-  title: 'Diffusion-based Aesthetic QR Code Generation via Scanning-Robust Perceptual Guidance',
+  title: 'DiffQRCoder: Diffusion-based Aesthetic QR Code Generation with Scanning Robustness Guided Iterative Refinement',
   venue: '',
   authors: [
-    { text: 'Jia-Wei Liao', homepage: 'https://jwliao1209.github.io/', mark: '' },
-    { text: 'Winston Wang', homepage: '', mark: '' },
-    { text: 'Tzu-Sian Wang', homepage: '', mark: '' },
-    { text: 'Li-Xuan Peng', homepage: '', mark: '' },
-    { text: 'Cheng-Fu Chou', homepage: '', mark: ''},
-    { text: 'Jun-Cheng Chen', homepage: 'https://www.citi.sinica.edu.tw/pages/pullpull/', mark: '' },
+    { text: 'Jia-Wei Liao', homepage: 'https://jwliao1209.github.io/', mark: '1,2' },
+    { text: 'Winston Wang', homepage: '', mark: '1*' },
+    { text: 'Tzu-Sian Wang', homepage: '', mark: '1*' },
+    { text: 'Li-Xuan Peng', homepage: '', mark: '1*' },
+    { text: 'Ju-Hsuan Weng', homepage: '', mark: '1,2' },
+    { text: 'Cheng-Fu Chou', homepage: '', mark: '2'},
+    { text: 'Jun-Cheng Chen', homepage: 'https://www.citi.sinica.edu.tw/pages/pullpull/', mark: '1' },
   ],
   affiliations: [
-    { text: 'Research Center for Information Technology Innovation, Academia Sinica National Taiwan University', mark: '' }
+    { text: ' Research Center for Information Technology Innovation, Academia Sinica', mark: '1' },
+    { text: ' National Taiwan University', mark: '2' }
   ],
   links: [
     // { text: 'Paper', url: 'https://doi.org/10.1609/aaai.v38i2.27899', icon: ['ai', 'ai-doi'] },

@@ -1,5 +1,5 @@
 {
-  "date": "2024-04-25T05:48:48.617Z",
+  "date": "2024-10-30T01:09:03.704Z",
   "preset": "static",
   "commands": {
     "preview": "npx serve ./public"
